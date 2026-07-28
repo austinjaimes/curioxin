@@ -45,6 +45,11 @@ const articles = await getCollection(
   (article) => article.data.category === category
 );
 
+const rankings = await getCollection(
+  "rankings",
+  (ranking) => ranking.data.category === category
+);
+
 ---
 
 
@@ -68,6 +73,49 @@ description={`Artículos sobre ${category} en Curioxin.`}
 <p class="mt-4 text-gray-600">
 Artículos, análisis y recomendaciones sobre {category}.
 </p>
+
+{
+rankings.length > 0 && (
+
+<section class="mt-16">
+
+<h2 class="text-3xl font-bold">
+Rankings de {category}
+</h2>
+
+
+<div class="mt-8 grid gap-8 md:grid-cols-3">
+
+{
+rankings.map(ranking => (
+
+<ArticleCard
+
+slug={ranking.id}
+
+image={ranking.data.image}
+
+category={ranking.data.category}
+
+title={ranking.data.title}
+
+description={ranking.data.description}
+
+date={ranking.data.date}
+
+type="ranking"
+
+/>
+
+))
+}
+
+</div>
+
+</section>
+
+)
+}
 
 
 
