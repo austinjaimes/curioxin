@@ -1,15 +1,19 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
+
 import sitemap from '@astrojs/sitemap';
-import netlify from '@astrojs/netlify';
+
+import vercel from '@astrojs/vercel';
+
 
 export default defineConfig({
+
   site: "https://curioxin.com",
 
   output: "server",
 
-  adapter: netlify(),
+  adapter: vercel(),
 
   integrations: [
     sitemap()
@@ -18,4 +22,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   }
+
 });
