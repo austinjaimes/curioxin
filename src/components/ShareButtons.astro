@@ -1,0 +1,297 @@
+---
+const {
+  title,
+  type = "article"
+} = Astro.props;
+
+
+const url = Astro.url.href;
+
+
+const encodedTitle = encodeURIComponent(title);
+const encodedUrl = encodeURIComponent(url);
+
+
+
+const whatsapp =
+`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+
+
+const twitter =
+`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
+
+
+const facebook =
+`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+
+const linkedin =
+`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+
+
+
+const heading =
+type === "ranking"
+? "¿Te ayudó este ranking?"
+: "¿Te gustó este artículo?";
+
+
+const description =
+type === "ranking"
+? "Comparte este ranking para que más personas descubran las mejores opciones en Curioxin."
+: "Comparte este contenido para que más personas descubran Curioxin.";
+
+---
+
+<section class="mt-20 rounded-3xl border border-gray-100 bg-gray-50 p-8">
+
+
+<div>
+
+<p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+Compartir
+</p>
+
+
+<h2 class="mt-3 text-3xl font-bold">
+{heading}
+</h2>
+
+
+<p class="mt-3 text-gray-600">
+{description}
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mt-8 flex-wrap items-center gap-4 flex">
+
+
+
+
+
+<a
+
+href={whatsapp}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+aria-label="Compartir en WhatsApp"
+
+title="WhatsApp"
+
+class="group flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-white transition hover:-translate-y-1 hover:shadow-lg"
+
+>
+
+
+<svg
+viewBox="0 0 24 24"
+class="h-6 w-6 fill-current"
+>
+
+<path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.5 0 0.1 5.4 0.1 12c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6A12 12 0 0 0 12.1 24c6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.6-8.5Z"/>
+
+</svg>
+
+
+</a>
+
+
+
+
+
+
+
+
+<a
+
+href={twitter}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+aria-label="Compartir en X"
+
+title="X"
+
+class="group flex h-12 w-12 items-center justify-center rounded-full bg-black text-white transition hover:-translate-y-1 hover:shadow-lg"
+
+>
+
+
+<span class="text-xl font-bold">
+𝕏
+</span>
+
+
+</a>
+
+
+
+
+
+
+
+
+
+<a
+
+href={facebook}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+aria-label="Compartir en Facebook"
+
+title="Facebook"
+
+class="group flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white transition hover:-translate-y-1 hover:shadow-lg"
+
+>
+
+
+<span class="text-2xl font-bold">
+f
+</span>
+
+
+</a>
+
+
+
+
+
+
+
+
+
+<a
+
+href={linkedin}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+aria-label="Compartir en LinkedIn"
+
+title="LinkedIn"
+
+class="group flex h-12 w-12 items-center justify-center rounded-full bg-sky-700 text-white transition hover:-translate-y-1 hover:shadow-lg"
+
+>
+
+
+<span class="text-lg font-bold">
+in
+</span>
+
+
+</a>
+
+
+
+
+
+
+
+
+
+<button
+
+id="copy-link"
+
+title="Copiar enlace"
+
+class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-3 font-semibold transition hover:-translate-y-1 hover:shadow-lg"
+
+>
+
+
+<svg
+viewBox="0 0 24 24"
+class="h-5 w-5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+>
+
+<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+
+<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+
+</svg>
+
+
+<span>
+Copiar enlace
+</span>
+
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<script>
+
+const button = document.getElementById("copy-link");
+
+
+button?.addEventListener("click", async()=>{
+
+
+await navigator.clipboard.writeText(window.location.href);
+
+
+button.innerHTML = "✅ Copiado";
+
+
+setTimeout(()=>{
+
+button.innerHTML = `
+<svg
+viewBox="0 0 24 24"
+class="h-5 w-5"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+>
+<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+</svg>
+<span>Copiar enlace</span>
+`;
+
+},2000);
+
+
+});
+
+
+</script>

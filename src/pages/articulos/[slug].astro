@@ -1,0 +1,344 @@
+---
+import { getCollection, render } from "astro:content";
+import { readingTime } from "../../utils/readingTime";
+import { formatDate } from "../../utils/formatDate";
+
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import RelatedArticles from "../../components/RelatedArticles.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
+
+
+export async function getStaticPaths() {
+
+const articles = await getCollection("articles");
+
+
+return articles.map((article)=>({
+
+params:{
+slug: article.id
+},
+
+props:{
+article
+}
+
+}));
+
+}
+
+
+const { article } = Astro.props;
+
+
+const { Content } = await render(article);
+
+
+const minutes = readingTime(article.body ?? "");
+
+
+const siteUrl = Astro.site ?? Astro.url.origin;
+
+
+const categorySlug =
+article.data.category
+.toLowerCase()
+.replaceAll(" ","-");
+
+---
+
+
+<Layout
+
+title={`${article.data.title} | Curioxin`}
+
+description={article.data.description}
+
+>
+
+
+
+<script
+
+type="application/ld+json"
+
+set:html={JSON.stringify({
+
+"@context":"https://schema.org",
+
+"@type":"Article",
+
+"headline":article.data.title,
+
+"description":article.data.description,
+
+"image":[
+`${siteUrl}${article.data.image}`
+],
+
+
+"author":{
+
+"@type":"Organization",
+
+"name":"Curioxin"
+
+},
+
+
+"publisher":{
+
+"@type":"Organization",
+
+"name":"Curioxin",
+
+"logo":{
+
+"@type":"ImageObject",
+
+"url":`${siteUrl}/logo.png`
+
+}
+
+},
+
+
+"datePublished":article.data.date,
+
+"dateModified":article.data.date,
+
+
+"articleSection":article.data.category,
+
+"inLanguage":"es-MX",
+
+
+"mainEntityOfPage":{
+
+"@type":"WebPage",
+
+"@id":Astro.url.href
+
+}
+
+})}
+
+/>
+
+
+
+
+
+<article class="mx-auto max-w-4xl px-6 py-20">
+
+
+
+<Breadcrumbs
+
+category={article.data.category}
+
+title={article.data.title}
+
+/>
+
+
+
+
+
+
+<header class="mt-8">
+
+
+
+<p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+
+{article.data.category}
+
+</p>
+
+
+
+
+
+<h1 class="mt-5 text-5xl font-bold leading-tight tracking-tight md:text-6xl">
+
+{article.data.title}
+
+</h1>
+
+
+
+
+
+<p class="mt-6 text-xl leading-relaxed text-gray-600">
+
+{article.data.description}
+
+</p>
+
+
+
+
+
+
+<div class="mt-8 flex flex-wrap gap-4 text-sm text-gray-500">
+
+
+<span>
+✍️ Equipo Curioxin
+</span>
+
+
+<span>
+📅 {formatDate(article.data.date)}
+</span>
+
+
+<span>
+⏱️ {minutes} minutos de lectura
+</span>
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+<img
+
+src={article.data.image}
+
+alt={article.data.title}
+
+loading="eager"
+
+class="mt-12 h-[500px] w-full rounded-3xl object-cover"
+
+/>
+
+
+
+
+
+
+
+<section class="mt-10 rounded-3xl bg-gray-50 p-6">
+
+
+<div class="grid gap-5 sm:grid-cols-3">
+
+
+<div>
+
+<p class="text-sm text-gray-500">
+Categoría
+</p>
+
+<p class="mt-1 font-bold">
+{article.data.category}
+</p>
+
+</div>
+
+
+
+<div>
+
+<p class="text-sm text-gray-500">
+Lectura
+</p>
+
+<p class="mt-1 font-bold">
+{minutes} minutos
+</p>
+
+</div>
+
+
+
+
+<div>
+
+<p class="text-sm text-gray-500">
+Publicado
+</p>
+
+<p class="mt-1 font-bold">
+{formatDate(article.data.date)}
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<div class="prose prose-lg mt-14 max-w-none">
+
+
+<Content />
+
+
+</div>
+
+
+<AdSlot />
+
+
+
+
+
+<div class="mt-16">
+
+
+<ShareButtons
+
+title={article.data.title}
+
+/>
+
+
+</div>
+
+
+
+
+
+
+
+<RelatedArticles
+
+currentId={article.id}
+
+category={article.data.category}
+
+/>
+
+
+
+
+
+</article>
+
+
+
+</Layout>

@@ -1,0 +1,631 @@
+---
+import { getCollection, render } from "astro:content";
+
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import RankingCard from "../../components/RankingCard.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
+
+
+export async function getStaticPaths(){
+
+const rankings = await getCollection("rankings");
+
+
+return rankings.map((ranking)=>({
+
+params:{
+slug: ranking.id
+},
+
+props:{
+ranking
+}
+
+}));
+
+}
+
+
+const { ranking } = Astro.props;
+
+
+const { Content } = await render(ranking);
+
+
+const siteUrl = Astro.site ?? Astro.url.origin;
+
+
+const items = ranking.data.items ?? [];
+
+
+const bestScore = items.length
+? items.reduce((best,current)=>
+current.score > best.score ? current : best
+)
+: null;
+
+---
+
+
+<Layout
+
+title={`${ranking.data.title} | Curioxin`}
+
+description={ranking.data.description}
+
+>
+
+
+
+<script
+
+type="application/ld+json"
+
+set:html={JSON.stringify({
+
+"@context":"https://schema.org",
+
+"@type":"ItemList",
+
+"name":ranking.data.title,
+
+"description":ranking.data.description,
+
+"url":Astro.url.href
+
+})}
+
+/>
+
+
+
+<script
+
+type="application/ld+json"
+
+set:html={JSON.stringify({
+
+"@context":"https://schema.org",
+
+"@type":"BreadcrumbList",
+
+"itemListElement":[
+
+{
+"@type":"ListItem",
+"position":1,
+"name":"Inicio",
+"item":siteUrl
+},
+
+{
+"@type":"ListItem",
+"position":2,
+"name":"Rankings",
+"item":`${siteUrl}/rankings`
+},
+
+{
+"@type":"ListItem",
+"position":3,
+"name":ranking.data.title,
+"item":Astro.url.href
+}
+
+]
+
+})}
+
+/>
+
+
+
+<main class="mx-auto max-w-5xl px-6 py-20">
+
+
+
+<Breadcrumbs
+
+title={ranking.data.title}
+
+category={ranking.data.category}
+
+type="ranking"
+
+/>
+
+
+
+
+
+<header>
+
+
+<p class="text-sm font-semibold text-blue-600">
+
+🏆 Curioxin Ranking
+
+</p>
+
+
+
+<h1 class="mt-5 text-5xl font-bold leading-tight tracking-tight">
+
+{ranking.data.title}
+
+</h1>
+
+
+
+<p class="mt-6 text-xl leading-relaxed text-gray-600">
+
+{ranking.data.description}
+
+</p>
+
+
+
+<div class="mt-6 flex flex-wrap gap-4 text-sm text-gray-500">
+
+<span>
+📅 Publicado el {ranking.data.date}
+</span>
+
+<span>
+📂 {ranking.data.category}
+</span>
+
+</div>
+
+
+</header>
+
+
+
+
+
+<img
+
+src={ranking.data.image}
+
+alt={ranking.data.title}
+
+class="mt-12 h-[420px] w-full rounded-3xl object-cover"
+
+/>
+
+
+
+
+
+
+
+<section class="mt-14 rounded-3xl bg-gray-50 p-10">
+
+
+<h2 class="text-3xl font-bold">
+
+¿Cómo elegimos este ranking?
+
+</h2>
+
+
+
+<p class="mt-5 leading-relaxed text-gray-600">
+
+Analizamos calidad, funciones, facilidad de uso,
+precio, rendimiento y utilidad para distintos perfiles
+de usuarios para crear una selección equilibrada.
+
+</p>
+
+
+
+
+<div class="mt-8 grid gap-6 md:grid-cols-3">
+
+
+<div class="rounded-2xl bg-white p-6">
+
+<div class="text-3xl">
+⭐
+</div>
+
+<h3 class="mt-4 font-bold">
+Calidad
+</h3>
+
+<p class="mt-2 text-gray-600">
+Evaluamos experiencia y resultados.
+</p>
+
+</div>
+
+
+
+<div class="rounded-2xl bg-white p-6">
+
+<div class="text-3xl">
+⚡
+</div>
+
+<h3 class="mt-4 font-bold">
+Funciones
+</h3>
+
+<p class="mt-2 text-gray-600">
+Comparamos características principales.
+</p>
+
+</div>
+
+
+
+
+<div class="rounded-2xl bg-white p-6">
+
+<div class="text-3xl">
+💰
+</div>
+
+<h3 class="mt-4 font-bold">
+Valor
+</h3>
+
+<p class="mt-2 text-gray-600">
+Tomamos en cuenta precio y utilidad.
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+{
+items.length > 0 && (
+
+<section class="mt-16">
+
+
+<h2 class="text-3xl font-bold">
+
+Resumen rápido
+
+</h2>
+
+
+
+
+<div class="mt-8 grid gap-6 md:grid-cols-3">
+
+
+
+<div class="rounded-3xl border border-gray-200 bg-white p-7">
+
+<p class="text-3xl">
+🏆
+</p>
+
+<h3 class="mt-4 font-bold">
+Mejor opción general
+</h3>
+
+<p class="mt-2 text-gray-600">
+{items[0].name}
+</p>
+
+</div>
+
+
+
+
+
+<div class="rounded-3xl border border-gray-200 bg-white p-7">
+
+<p class="text-3xl">
+⭐
+</p>
+
+<h3 class="mt-4 font-bold">
+Mayor puntuación
+</h3>
+
+<p class="mt-2 text-gray-600">
+
+{bestScore?.name}
+
+<span class="font-semibold text-green-600">
+
+({bestScore?.score}/10)
+
+</span>
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="rounded-3xl border border-gray-200 bg-white p-7">
+
+<p class="text-3xl">
+📂
+</p>
+
+<h3 class="mt-4 font-bold">
+Categoría
+</h3>
+
+<p class="mt-2 text-gray-600">
+
+{ranking.data.category}
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+)
+
+}
+
+
+
+<AdSlot />
+
+
+
+
+
+{
+items.length > 0 && (
+
+<section class="mt-16">
+
+
+<h2 class="mb-8 text-3xl font-bold">
+
+Comparativa rápida
+
+</h2>
+
+
+
+
+<div class="overflow-hidden rounded-3xl border border-gray-200">
+
+
+<div class="overflow-x-auto">
+
+
+<table class="min-w-full">
+
+
+<thead class="bg-gray-100">
+
+
+<tr>
+
+<th class="px-6 py-4 text-left">
+#
+</th>
+
+<th class="px-6 py-4 text-left">
+Herramienta
+</th>
+
+<th class="px-6 py-4 text-left">
+Puntuación
+</th>
+
+<th class="px-6 py-4 text-left">
+Precio
+</th>
+
+<th class="px-6 py-4 text-left">
+Ideal para
+</th>
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+  
+
+
+{
+items.map(item=>(
+
+
+<tr class="border-t border-gray-200">
+
+
+<td class="px-6 py-5 font-bold">
+
+{item.position <=3
+? ["🥇","🥈","🥉"][item.position-1]
+: item.position}
+
+</td>
+
+
+
+<td class="px-6 py-5 font-semibold">
+
+{item.name}
+
+</td>
+
+
+
+<td class="px-6 py-5">
+
+⭐ {item.score}/10
+
+</td>
+
+
+<td class="px-6 py-5">
+
+{item.price}
+
+</td>
+
+
+
+<td class="px-6 py-5">
+
+{item.idealFor}
+
+</td>
+
+
+</tr>
+
+
+))
+
+}
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+)
+
+}
+
+
+
+
+
+
+
+
+{
+items.length > 0 && (
+
+<section class="mt-20">
+
+
+<h2 class="mb-10 text-3xl font-bold">
+
+Análisis de cada opción
+
+</h2>
+
+
+
+<div class="space-y-10">
+
+
+{
+items.map(item=>(
+
+<RankingCard
+
+position={item.position}
+
+category={item.category}
+
+name={item.name}
+
+description={item.description}
+
+image={item.image}
+imageStyle={item.imageStyle}
+
+score={item.score}
+
+advantages={item.advantages}
+
+disadvantages={item.disadvantages}
+
+price={item.price}
+
+url={item.url}
+
+idealFor={item.idealFor}
+
+/>
+
+
+))
+
+}
+
+
+</div>
+
+
+
+</section>
+
+
+)
+
+}
+
+
+
+
+
+<article class="prose prose-lg mt-20 max-w-none">
+
+<Content />
+
+</article>
+
+
+<ShareButtons
+  title={ranking.data.title}
+  type="ranking"
+/>
+
+
+</main>
+
+
+
+</Layout>

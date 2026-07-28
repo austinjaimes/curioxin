@@ -1,0 +1,248 @@
+---
+import { getCollection } from "astro:content";
+
+import Layout from "../layouts/Layout.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+
+
+const articles = (await getCollection("articles")).sort(
+  (a, b) =>
+    new Date(b.data.date).getTime() -
+    new Date(a.data.date).getTime()
+);
+
+const rankings = (await getCollection("rankings")).sort(
+  (a, b) =>
+    new Date(b.data.date).getTime() -
+    new Date(a.data.date).getTime()
+);
+
+
+const latestArticles = articles.slice(0, 3);
+
+const latestRankings = rankings.slice(0, 3);
+
+
+const categories = [
+  "Inteligencia Artificial",
+  "Tecnología",
+  "Productividad"
+];
+
+---
+
+<Layout
+
+title="Explorar | Curioxin"
+
+description="Explora artículos, rankings y categorías de Curioxin."
+
+>
+
+
+<main class="mx-auto max-w-7xl px-6 py-20">
+
+
+
+<section class="max-w-3xl">
+
+
+<p class="text-sm font-semibold text-blue-600">
+Curioxin Explore
+</p>
+
+
+<h1 class="mt-4 text-5xl font-bold">
+Explora tecnología, IA y productividad
+</h1>
+
+
+<p class="mt-5 text-lg text-gray-600">
+Descubre artículos, rankings y comparativas seleccionadas por Curioxin.
+</p>
+
+
+</section>
+
+
+
+
+
+<!-- Categorías -->
+
+
+<section class="mt-16">
+
+
+<h2 class="text-3xl font-bold">
+Categorías
+</h2>
+
+
+<div class="mt-8 flex flex-wrap gap-4">
+
+
+{
+categories.map(category => (
+
+<a
+
+href={`/categoria/${
+  category
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replaceAll(" ", "-")
+}`}
+
+class="rounded-full border px-5 py-3 hover:border-blue-600 hover:text-blue-600"
+
+>
+
+{category}
+
+</a>
+
+))
+}
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- Rankings -->
+
+
+<section class="mt-20">
+
+
+<div class="flex items-center justify-between">
+
+
+<h2 class="text-3xl font-bold">
+Rankings destacados
+</h2>
+
+
+<a 
+href="/rankings"
+class="hover:text-blue-600"
+>
+Ver todos →
+</a>
+
+
+</div>
+
+
+
+<div class="mt-8 grid gap-8 md:grid-cols-3">
+
+
+{
+latestRankings.map(ranking => (
+
+<a
+
+href={`/rankings/${ranking.id}`}
+
+class="rounded-3xl border p-6 hover:shadow-xl"
+
+>
+
+<h3 class="text-xl font-bold">
+{ranking.data.title}
+</h3>
+
+
+<p class="mt-3 text-gray-600">
+{ranking.data.description}
+</p>
+
+
+</a>
+
+))
+}
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- Artículos -->
+
+
+<section class="mt-20">
+
+
+<div class="flex items-center justify-between">
+
+
+<h2 class="text-3xl font-bold">
+Últimos artículos
+</h2>
+
+
+<a 
+href="/articulos"
+class="hover:text-blue-600"
+>
+Ver todos →
+</a>
+
+
+</div>
+
+
+
+<div class="mt-8 grid gap-8 md:grid-cols-3">
+
+
+{
+latestArticles.map(article => (
+
+<ArticleCard
+
+slug={article.id}
+
+image={article.data.image}
+
+category={article.data.category}
+
+title={article.data.title}
+
+description={article.data.description}
+
+date={article.data.date}
+
+type="article"
+
+/>
+
+))
+}
+
+
+</div>
+
+
+</section>
+
+
+
+</main>
+
+
+</Layout>

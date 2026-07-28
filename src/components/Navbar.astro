@@ -1,0 +1,209 @@
+<nav class="border-b border-gray-100 bg-white">
+
+
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+
+
+<!-- Logo -->
+
+<a 
+href="/"
+class="flex items-center gap-3"
+>
+
+<img
+src="/logo.png"
+alt="Curioxin"
+class="h-18 w-auto object-contain"
+/>
+
+
+</a>
+
+
+
+
+
+<!-- Desktop Menu -->
+
+<div class="hidden items-center gap-10 md:flex">
+
+
+<a 
+href="/"
+class="text-base font-medium text-gray-700 transition hover:text-blue-600"
+>
+Inicio
+</a>
+
+
+
+<a 
+href="/rankings"
+class="text-base font-medium text-gray-700 transition hover:text-blue-600"
+>
+Rankings
+</a>
+
+
+
+<a 
+href="/articulos"
+class="text-base font-medium text-gray-700 transition hover:text-blue-600"
+>
+Artículos
+</a>
+
+
+
+<a 
+href="/categorias"
+class="text-base font-medium text-gray-700 transition hover:text-blue-600"
+>
+Categorías
+</a>
+
+
+
+</div>
+
+
+
+
+
+<!-- Desktop Button -->
+
+<a
+
+href="/explorar"
+
+class="hidden rounded-full bg-black px-7 py-3 text-base font-semibold text-white transition hover:bg-blue-600 md:block"
+
+>
+Explorar
+</a>
+
+
+
+
+
+<!-- Mobile Button -->
+
+<button
+
+id="menu-button"
+
+class="text-3xl md:hidden"
+
+aria-label="Abrir menú"
+
+>
+
+☰
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Mobile Menu -->
+
+
+<div
+
+id="mobile-menu"
+
+class="hidden border-t border-gray-100 px-6 py-6 md:hidden"
+
+>
+
+
+<div class="flex flex-col gap-6">
+
+
+
+<a 
+href="/"
+class="text-lg font-medium text-gray-700"
+>
+Inicio
+</a>
+
+
+
+<a 
+href="/rankings"
+class="text-lg font-medium text-gray-700"
+>
+Rankings
+</a>
+
+
+
+<a 
+href="/articulos"
+class="text-lg font-medium text-gray-700"
+>
+Artículos
+</a>
+
+
+
+<a 
+href="/categorias"
+class="text-lg font-medium text-gray-700"
+>
+Categorías
+</a>
+
+
+
+
+<a
+
+href="/explorar"
+
+class="mt-2 rounded-full bg-black px-6 py-3 text-center text-lg font-semibold text-white"
+
+>
+Explorar
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</nav>
+
+
+
+
+
+
+<script>
+
+const button = document.getElementById("menu-button");
+
+const menu = document.getElementById("mobile-menu");
+
+
+button?.addEventListener("click",()=>{
+
+menu?.classList.toggle("hidden");
+
+});
+
+
+</script>

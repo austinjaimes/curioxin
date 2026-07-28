@@ -1,0 +1,139 @@
+---
+import { getCollection } from "astro:content";
+
+import ArticleCard from "./ArticleCard.astro";
+
+
+const {
+  currentId,
+  category
+} = Astro.props;
+
+
+
+const articles = await getCollection("articles");
+
+
+
+const related = articles
+
+.filter(article =>
+
+article.id !== currentId &&
+
+article.data.category === category
+
+)
+
+.sort(
+
+(a,b)=>
+
+new Date(b.data.date).getTime() -
+
+new Date(a.data.date).getTime()
+
+)
+
+.slice(0,3);
+
+
+---
+
+
+
+
+{
+related.length > 0 && (
+
+
+<section class="mt-24 border-t border-gray-100 pt-16">
+
+
+
+
+
+<div class="max-w-2xl">
+
+
+<p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+
+Más contenido
+
+</p>
+
+
+
+<h2 class="mt-3 text-3xl font-bold">
+
+También te puede interesar
+
+</h2>
+
+
+
+<p class="mt-3 text-gray-600">
+
+Continúa explorando más análisis de {category} en Curioxin.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="mt-10 grid gap-8 md:grid-cols-3">
+
+
+
+{
+related.map(article => (
+
+
+
+<ArticleCard
+
+slug={article.id}
+
+image={article.data.image}
+
+category={article.data.category}
+
+title={article.data.title}
+
+description={article.data.description}
+
+date={article.data.date}
+
+type="article"
+
+/>
+
+
+
+))
+
+}
+
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+)
+
+}

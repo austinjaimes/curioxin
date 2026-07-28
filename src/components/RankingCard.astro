@@ -1,0 +1,233 @@
+---
+const {
+  position,
+  name,
+  description,
+  category,
+  score,
+  image = "/logo.png",
+  imageStyle = "icon",
+  advantages,
+  disadvantages,
+  price,
+  url,
+  idealFor
+} = Astro.props;
+
+const medalStyle =
+  position === 1
+    ? "bg-yellow-400 text-yellow-900"
+    : position === 2
+    ? "bg-gray-300 text-gray-800"
+    : position === 3
+    ? "bg-orange-300 text-orange-900"
+    : "bg-blue-600 text-white";
+
+const medal =
+  position <= 3
+    ? ["🥇", "🥈", "🥉"][position - 1]
+    : null;
+---
+
+<article
+  class:list={[
+    "group rounded-3xl border bg-white p-8 transition duration-300 hover:-translate-y-1 hover:shadow-xl",
+    position === 1
+      ? "border-yellow-300 shadow-lg"
+      : "border-gray-200"
+  ]}
+>
+
+  <div class="flex items-start gap-5">
+
+    <div
+      class={`flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full font-bold ${medalStyle}`}
+    >
+
+      {
+        medal && (
+          <span class="text-xl">
+            {medal}
+          </span>
+        )
+      }
+
+      <span>
+        #{position}
+      </span>
+
+    </div>
+
+    <div class="flex-1">
+
+      {
+        imageStyle === "product" && (
+
+          <div class="mb-8 flex justify-center">
+
+            <img
+              src={image}
+              alt={name}
+              loading="lazy"
+              decoding="async"
+              class="h-72 object-contain transition duration-300 group-hover:scale-105"
+            />
+
+          </div>
+
+        )
+      }
+
+      <div class="flex items-center gap-4">
+
+        {
+          imageStyle !== "product" && (
+
+            <img
+              src={image}
+              alt={name}
+              loading="lazy"
+              decoding="async"
+              class:list={[
+                "transition duration-300 group-hover:scale-105",
+                imageStyle === "banner"
+                  ? "h-20 w-32 rounded-xl object-cover"
+                  : "h-14 w-14 rounded-xl object-cover"
+              ]}
+            />
+
+          )
+        }
+
+        <div>
+
+          <p class="text-sm font-semibold text-blue-600">
+            {category}
+          </p>
+
+          {
+            position === 1 && (
+              <p class="mt-1 text-sm font-bold text-yellow-600">
+                🏆 Nuestra elección
+              </p>
+            )
+          }
+
+          <h2 class="mt-1 text-2xl font-bold">
+            {name}
+          </h2>
+
+        </div>
+
+      </div>
+
+      <p class="mt-5 leading-relaxed text-gray-600">
+        {description}
+      </p>
+
+      {
+        score && (
+          <div class="mt-5 inline-flex rounded-full bg-green-50 px-4 py-2 font-bold text-green-700">
+            ⭐ {score}/10
+          </div>
+        )
+      }
+
+      {
+        idealFor && (
+          <div class="mt-5">
+            <p class="font-semibold">
+              🎯 Ideal para
+            </p>
+
+            <p class="text-gray-600">
+              {idealFor}
+            </p>
+          </div>
+        )
+      }
+
+      {
+        advantages?.length > 0 && (
+
+          <div class="mt-6">
+
+            <p class="font-semibold text-green-700">
+              ✅ Lo mejor
+            </p>
+
+            <ul class="mt-2 space-y-1 text-gray-600">
+
+              {
+                advantages.map((item: string) => (
+                  <li>• {item}</li>
+                ))
+              }
+
+            </ul>
+
+          </div>
+
+        )
+      }
+
+      {
+        disadvantages?.length > 0 && (
+
+          <div class="mt-5">
+
+            <p class="font-semibold text-red-600">
+              ❌ Lo peor
+            </p>
+
+            <ul class="mt-2 space-y-1 text-gray-600">
+
+              {
+                disadvantages.map((item: string) => (
+                  <li>• {item}</li>
+                ))
+              }
+
+            </ul>
+
+          </div>
+
+        )
+      }
+
+      {
+        price && (
+          <div class="mt-5">
+
+            <p class="font-semibold">
+              💰 Precio
+            </p>
+
+            <p class="text-gray-600">
+              {price}
+            </p>
+
+          </div>
+        )
+      }
+
+      {
+        url && (
+
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            class="mt-6 inline-flex rounded-xl bg-black px-5 py-3 font-semibold text-white transition hover:bg-blue-600"
+          >
+            Visitar sitio →
+          </a>
+
+        )
+      }
+
+    </div>
+
+  </div>
+
+</article>

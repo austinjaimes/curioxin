@@ -1,0 +1,163 @@
+---
+const {
+  category,
+  title,
+  type = "article"
+} = Astro.props;
+
+
+
+const categorySlug = category
+  ?.toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .replaceAll(" ", "-");
+
+
+
+const section =
+type === "ranking"
+? {
+    name: "Rankings",
+    url: "/rankings"
+  }
+: {
+    name: "Artículos",
+    url: "/articulos"
+  };
+
+---
+
+
+
+<nav
+aria-label="Breadcrumb"
+class="mb-8"
+>
+
+
+<ol class="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+
+
+
+
+
+<li>
+
+<a
+href="/"
+class="transition hover:text-blue-600"
+>
+
+Inicio
+
+</a>
+
+</li>
+
+
+
+
+<li class="text-gray-300">
+/
+</li>
+
+
+
+
+
+
+
+<li>
+
+<a
+
+href={section.url}
+
+class="transition hover:text-blue-600"
+
+>
+
+{section.name}
+
+</a>
+
+</li>
+
+
+
+
+
+
+
+{
+category && (
+
+<>
+
+<li class="text-gray-300">
+/
+</li>
+
+
+
+<li>
+
+<a
+
+href={`/categoria/${categorySlug}`}
+
+class="transition hover:text-blue-600"
+
+>
+
+{category}
+
+</a>
+
+
+</li>
+
+</>
+
+)
+
+}
+
+
+
+
+
+
+
+<li class="text-gray-300">
+/
+</li>
+
+
+
+
+
+
+<li
+
+aria-current="page"
+
+class="max-w-[250px] truncate rounded-full bg-gray-100 px-3 py-1 font-medium text-gray-700"
+
+>
+
+{title}
+
+</li>
+
+
+
+
+
+
+
+</ol>
+
+
+</nav>

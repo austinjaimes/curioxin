@@ -1,0 +1,187 @@
+---
+import { getCollection } from "astro:content";
+
+
+const rankings = (await getCollection("rankings"))
+.sort(
+  (a,b) =>
+    new Date(b.data.date).getTime() -
+    new Date(a.data.date).getTime()
+);
+
+
+const featured = rankings.slice(0,3);
+
+---
+
+
+<section class="mx-auto max-w-7xl px-6 py-20">
+
+
+<div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+
+
+
+<div class="max-w-3xl">
+
+
+<p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+Curioxin Rankings
+</p>
+
+
+<h2 class="mt-3 text-4xl font-bold tracking-tight">
+Mejores rankings y comparativas
+</h2>
+
+
+<p class="mt-4 text-gray-600">
+Descubre productos, herramientas y servicios analizados
+para ayudarte a elegir mejores opciones.
+</p>
+
+
+</div>
+
+
+
+
+<a
+
+href="/rankings"
+
+class="font-semibold transition hover:text-blue-600"
+
+>
+
+Ver todos →
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="mt-12 grid gap-8 md:grid-cols-3">
+
+
+
+{
+featured.map((ranking)=>(
+
+
+
+<a
+
+href={`/rankings/${ranking.id}`}
+
+class="group overflow-hidden rounded-3xl border border-gray-200 bg-white transition hover:-translate-y-1 hover:shadow-xl"
+
+>
+
+
+
+<div class="relative overflow-hidden">
+
+
+<img
+
+src={ranking.data.image}
+
+alt={ranking.data.title}
+
+class="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
+
+/>
+
+
+
+<div class="absolute left-5 top-5">
+
+
+<span class="rounded-full bg-white px-4 py-2 text-sm font-semibold shadow">
+
+🏆 Ranking
+
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="p-7">
+
+
+<p class="text-sm font-semibold text-blue-600">
+
+{ranking.data.category}
+
+</p>
+
+
+
+
+
+<h3 class="mt-3 text-2xl font-bold leading-tight">
+
+{ranking.data.title}
+
+</h3>
+
+
+
+
+
+
+<p class="mt-4 line-clamp-3 text-gray-600">
+
+{ranking.data.description}
+
+</p>
+
+
+
+
+
+
+<div class="mt-6 font-semibold transition group-hover:text-blue-600">
+
+Ver ranking →
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</a>
+
+
+
+))
+}
+
+
+
+</div>
+
+
+
+</section>

@@ -1,0 +1,240 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../utils/formatDate";
+
+
+const rankings = (await getCollection("rankings"))
+.sort(
+(a,b)=>
+new Date(b.data.date).getTime() -
+new Date(a.data.date).getTime()
+);
+
+---
+
+
+<Layout
+
+title="Rankings | Curioxin"
+
+description="Los mejores rankings de tecnología, inteligencia artificial y productividad."
+
+>
+
+
+
+<main class="mx-auto max-w-7xl px-6 py-20">
+
+
+
+<section class="max-w-4xl">
+
+
+<p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+
+🏆 Curioxin Rankings
+
+</p>
+
+
+
+<h1 class="mt-5 text-5xl font-bold leading-tight tracking-tight md:text-6xl">
+
+Los mejores rankings de tecnología
+
+</h1>
+
+
+
+<p class="mt-6 max-w-3xl text-xl leading-relaxed text-gray-600">
+
+Comparativas, análisis y selecciones de herramientas,
+apps y productos tecnológicos que realmente destacan.
+
+</p>
+
+
+
+
+<div class="mt-8 inline-flex rounded-full bg-gray-100 px-5 py-3 text-sm font-medium text-gray-600">
+
+{rankings.length} rankings publicados
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+{
+rankings.length > 0 ? (
+
+
+<section class="mt-16 grid gap-8 md:grid-cols-3">
+
+
+
+{
+rankings.map((ranking)=>(
+
+
+<a
+
+href={`/rankings/${ranking.id}`}
+
+class="group overflow-hidden rounded-3xl border border-gray-200 bg-white transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+
+>
+
+
+
+<div class="relative overflow-hidden">
+
+
+<img
+
+src={ranking.data.image}
+
+alt={ranking.data.title}
+
+class="h-60 w-full object-cover transition duration-500 group-hover:scale-105"
+
+/>
+
+
+
+
+<div class="absolute left-5 top-5">
+
+
+<span class="rounded-full bg-white px-4 py-2 text-sm font-semibold shadow">
+
+🏆 Ranking
+
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="p-7">
+
+
+<p class="text-sm font-semibold text-blue-600">
+
+{ranking.data.category}
+
+</p>
+
+
+
+
+
+<h2 class="mt-3 text-2xl font-bold leading-tight">
+
+{ranking.data.title}
+
+</h2>
+
+
+
+
+
+<p class="mt-4 leading-relaxed text-gray-600">
+
+{ranking.data.description}
+
+</p>
+
+
+
+
+
+<div class="mt-5 text-sm text-gray-500">
+
+📅 {formatDate(ranking.data.date)}
+
+</div>
+
+
+
+
+
+<div class="mt-6 font-semibold transition group-hover:text-blue-600">
+
+Ver ranking →
+
+</div>
+
+
+
+</div>
+
+
+
+
+</a>
+
+
+
+))
+
+}
+
+
+
+</section>
+
+
+
+) : (
+
+
+
+<section class="mt-16 rounded-3xl border border-gray-200 p-10 text-center">
+
+
+<h2 class="text-2xl font-bold">
+
+Aún no hay rankings publicados
+
+</h2>
+
+
+<p class="mt-4 text-gray-600">
+
+Pronto encontrarás comparativas y selecciones de tecnología.
+
+</p>
+
+
+</section>
+
+
+
+)
+
+}
+
+
+
+</main>
+
+
+
+</Layout>
