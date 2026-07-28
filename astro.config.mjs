@@ -4,23 +4,19 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
-import vercel from '@astrojs/vercel';
-
 
 export default defineConfig({
 
   site: "https://curioxin.com",
 
-  output: "server",
-
-  adapter: vercel(),
-
-  integrations: [
+  integrations:[
     sitemap()
   ],
 
-  vite: {
-    plugins: [tailwindcss()]
+  vite:{
+    plugins:[
+      tailwindcss()
+    ]
   }
 
 });
