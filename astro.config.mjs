@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
 
-  site: "https://curioxin.com",
+  site: "https://www.curioxin.com",
 
   integrations:[
     sitemap()
