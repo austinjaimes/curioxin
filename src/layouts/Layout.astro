@@ -22,9 +22,7 @@ const canonicalURL = new URL(
 
 
 
-const imageURL = image.startsWith("http")
-? image
-: `${siteUrl}${image}`;
+const imageURL = new URL(image, siteUrl).href;
 
 
 
