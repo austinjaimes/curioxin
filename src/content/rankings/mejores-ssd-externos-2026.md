@@ -117,28 +117,83 @@ Para este ranking analizamos:
 - Tamaño y portabilidad.
 - Relación calidad-precio.
 
+También consideramos qué tipo de usuario puede aprovechar realmente cada unidad. No todos necesitan el SSD más rápido del mercado, ya que el rendimiento puede estar limitado por el puerto USB de la computadora, la capacidad elegida o el tipo de archivos que se transfieren.
+
 ## ¿Vale la pena comprar un SSD externo?
 
 Sí.
 
-Comparado con un disco duro tradicional, un SSD externo ofrece velocidades mucho mayores, menor tiempo de espera y una mejor resistencia a golpes.
+Comparado con un disco duro tradicional, un SSD externo ofrece velocidades mucho mayores, menor tiempo de espera y una mejor resistencia a golpes al no utilizar partes mecánicas móviles.
 
-Además, resulta ideal para editar video directamente desde la unidad, transportar proyectos o realizar copias de seguridad.
+Además, resulta especialmente útil para editar video, transportar proyectos, almacenar bibliotecas de fotografías, instalar juegos compatibles y mantener copias de seguridad de archivos importantes.
+
+Sin embargo, hay que tener en cuenta que la velocidad anunciada por el fabricante no siempre será la velocidad que obtendrás en la práctica. El puerto USB utilizado, el cable, el dispositivo conectado y el tamaño de las transferencias pueden influir considerablemente en el rendimiento.
+
+## ¿Qué velocidad necesitas realmente?
+
+No todos los usuarios necesitan las velocidades más altas disponibles.
+
+Para documentos, fotografías y copias de seguridad normales, un SSD externo de gama media puede ser más que suficiente.
+
+Para edición de video, transferencia de grandes bibliotecas de fotografías o proyectos profesionales, una unidad más rápida puede reducir considerablemente los tiempos de espera.
+
+Por eso, antes de pagar más por el SSD más rápido, conviene comprobar qué estándar USB soporta tu computadora.
 
 ## ¿Cuánta capacidad necesito?
 
-Depende del uso.
+Depende principalmente del tipo de archivos que quieras almacenar.
 
-- 500 GB suelen ser suficientes para documentos y archivos personales.
-- 1 TB representa el equilibrio ideal para la mayoría de usuarios.
-- 2 TB o más son recomendables para creadores de contenido y profesionales que manejan grandes cantidades de información.
+- **500 GB:** suficiente para documentos, fotografías y archivos personales.
+- **1 TB:** el punto de equilibrio para la mayoría de usuarios.
+- **2 TB:** recomendable para videojuegos, edición de video y grandes bibliotecas multimedia.
+- **4 TB o más:** pensado principalmente para profesionales y usuarios que manejan grandes cantidades de información.
+
+También conviene recordar que la capacidad disponible siempre será ligeramente inferior a la anunciada debido al sistema de archivos y a la forma en que los fabricantes calculan el almacenamiento.
+
+## ¿SSD externo o disco duro externo?
+
+La elección depende del uso.
+
+Un **SSD externo** es mejor si necesitas velocidad, portabilidad y resistencia para transportar archivos con frecuencia.
+
+Un **disco duro externo** puede resultar más interesante si buscas mucha capacidad al menor precio posible y no necesitas transferir archivos constantemente.
+
+Para copias de seguridad grandes que permanecen en casa o en una oficina, un disco duro puede seguir siendo una alternativa económica. Para trabajar directamente con archivos pesados o llevar tus proyectos contigo, un SSD suele ser mucho más práctico.
+
+## ¿Qué SSD externo debería comprar?
+
+La mejor opción depende de tus necesidades:
+
+- **Mejor rendimiento general:** Samsung T9
+- **Mejor resistencia y portabilidad:** SanDisk Extreme Pro Portable SSD
+- **Mejor equilibrio para usuarios avanzados:** Crucial X10 Pro
+- **Mejor opción compacta:** Kingston XS2000
+- **Mejor alternativa para uso diario:** WD My Passport SSD
+
+## ¿Qué debes revisar antes de comprar?
+
+Antes de elegir un SSD externo, no te fijes únicamente en la velocidad máxima anunciada.
+
+Comprueba también:
+
+- El puerto USB disponible en tu computadora.
+- La capacidad que realmente necesitas.
+- El tamaño y peso de la unidad.
+- La resistencia si vas a transportarla constantemente.
+- La compatibilidad con Windows, macOS, consolas u otros dispositivos.
+- La garantía y soporte del fabricante.
+- Si incluye el cable necesario para aprovechar su máxima velocidad.
+
+Estos factores pueden hacer que un modelo aparentemente más caro termine siendo una mejor compra para determinado usuario.
 
 ## Conclusión
 
-Un SSD externo no solo ofrece más espacio, también mejora considerablemente la velocidad con la que trabajas.
+Un SSD externo no solo ofrece más espacio: también puede mejorar considerablemente la velocidad con la que trabajas y facilitar el transporte de archivos grandes.
 
-Si buscas el mejor rendimiento disponible, Samsung T9 continúa siendo una referencia del mercado.
+Si buscas el máximo rendimiento, **Samsung T9** continúa siendo una referencia para usuarios que cuentan con hardware compatible.
 
-Para quienes necesitan una opción resistente, SanDisk Extreme Pro Portable SSD destaca por su durabilidad.
+Para quienes necesitan una unidad resistente para llevarla constantemente consigo, **SanDisk Extreme Pro Portable SSD** es una alternativa muy interesante.
 
-Y si buscas ahorrar sin sacrificar demasiado rendimiento, Kingston y WD ofrecen excelentes alternativas para la mayoría de usuarios.
+Por otro lado, **Crucial X10 Pro** ofrece un buen equilibrio para usuarios avanzados, mientras que **Kingston XS2000** y **WD My Passport SSD** son opciones más prácticas para quienes priorizan portabilidad, precio y facilidad de uso.
+
+La mejor compra no necesariamente es el SSD con la cifra de velocidad más alta, sino el que aprovecha correctamente el hardware que ya tienes y se adapta a la cantidad y tipo de archivos que manejas.
