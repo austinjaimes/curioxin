@@ -534,6 +534,17 @@ Sino porque actualmente es una alternativa especializada.
 
 ---
 
+## ¿No sabes qué celular elegir?
+
+Elegir un celular no depende únicamente de tener el procesador más potente o la cámara con más megapíxeles.
+
+Dependiendo de tu presupuesto y de cómo piensas utilizarlo, algunas características pueden ser mucho más importantes que otras.
+
+Si quieres saber qué debes revisar antes de comprar, qué especificaciones realmente importan y cómo elegir un celular según tus necesidades, 
+
+[**Consulta nuestra guía para comprar un Celular →**](/compras-inteligentes/como-elegir-un-celular)
+
+
 # ¿Cuál tiene la mejor cámara?
 
 La respuesta depende de qué quieras fotografiar.

@@ -16,6 +16,45 @@ const categories = [
   )
 ];
 
+const shoppingGuides = [
+  {
+    name: "Celulares",
+    description:
+      "Qué revisar antes de comprar un celular y cómo elegir según tu presupuesto y necesidades.",
+    href: "/compras-inteligentes/celulares"
+  },
+  {
+    name: "Audífonos Bluetooth",
+    description:
+      "Aprende qué características realmente importan antes de comprar audífonos Bluetooth.",
+    href: "/compras-inteligentes/audifonos-bluetooth"
+  },
+  {
+    name: "Laptops",
+    description:
+      "Una guía para elegir procesador, memoria, almacenamiento y pantalla según tu uso.",
+    href: "/compras-inteligentes/laptops"
+  },
+  {
+    name: "Monitores",
+    description:
+      "Descubre qué resolución, panel, frecuencia y características necesitas.",
+    href: "/compras-inteligentes/monitores"
+  },
+  {
+    name: "Smartwatches",
+    description:
+      "Qué debes considerar antes de elegir un smartwatch para tu día a día.",
+    href: "/compras-inteligentes/smartwaches"
+  },
+  {
+    name: "Gaming",
+    description:
+      "Cómo elegir productos gaming sin gastar de más y qué características importan.",
+    href: "/compras-inteligentes/gaming"
+  }
+];
+
 const getCategorySlug = (category) =>
   category
     .toLowerCase()
@@ -72,6 +111,40 @@ const getCategoryCount = (category) =>
 
     </header>
 
+
+    <!-- Compras inteligentes -->
+
+    <section class="mt-16 rounded-3xl bg-blue-50 px-8 py-10 md:px-12">
+
+      <div class="max-w-3xl">
+
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+          Compras inteligentes
+        </p>
+
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-gray-950 md:text-4xl">
+          ¿No sabes cuál elegir?
+        </h2>
+
+        <p class="mt-4 leading-relaxed text-gray-600">
+          Nuestros rankings te muestran qué productos destacan, pero si
+          quieres entender qué debes revisar antes de comprar, consulta
+          nuestras guías de compras inteligentes.
+        </p>
+
+        <a
+          href="/compras-inteligentes"
+          class="mt-7 inline-flex rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:bg-blue-600"
+        >
+          Explorar compras inteligentes →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- Rankings -->
 
     <section class="mt-20">
 
@@ -184,12 +257,81 @@ const getCategoryCount = (category) =>
     </section>
 
 
-    <section class="mt-20 rounded-3xl bg-gray-950 px-8 py-10 text-white md:px-12">
+    <!-- Guías de compras inteligentes -->
+
+    <section class="mt-24">
+
+      <div class="max-w-3xl">
+
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+          Guías de compra
+        </p>
+
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-gray-950 md:text-4xl">
+          Aprende a comprar mejor
+        </h2>
+
+        <p class="mt-4 leading-relaxed text-gray-600">
+          Antes de elegir un producto, conviene saber qué características
+          realmente importan. Explora nuestras guías para tomar decisiones
+          más informadas.
+        </p>
+
+      </div>
+
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        {
+          shoppingGuides.map(guide => (
+
+            <a
+              href={guide.href}
+              class="group rounded-3xl border border-gray-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-gray-200/50"
+            >
+
+              <div class="flex items-center justify-between">
+
+                <span class="text-sm font-semibold uppercase tracking-wider text-blue-600">
+                  Guía de compra
+                </span>
+
+                <span class="text-xl text-gray-300 transition group-hover:translate-x-1 group-hover:text-blue-600">
+                  →
+                </span>
+
+              </div>
+
+              <h3 class="mt-8 text-2xl font-bold tracking-tight text-gray-950">
+                {guide.name}
+              </h3>
+
+              <p class="mt-3 leading-relaxed text-gray-600">
+                {guide.description}
+              </p>
+
+              <p class="mt-6 font-semibold text-gray-950 transition group-hover:text-blue-600">
+                Leer guía →
+              </p>
+
+            </a>
+
+          ))
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA final -->
+
+    <section class="mt-24 rounded-3xl bg-gray-950 px-8 py-10 text-white md:px-12">
 
       <div class="max-w-2xl">
 
         <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
-          Próximamente
+          Curioxin
         </p>
 
         <h2 class="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
@@ -197,15 +339,16 @@ const getCategoryCount = (category) =>
         </h2>
 
         <p class="mt-4 leading-relaxed text-gray-400">
-          Estamos preparando nuevas comparativas para ayudarte a encontrar
-          productos que realmente valgan la pena según tus necesidades y presupuesto.
+          Analizamos productos y herramientas para ayudarte a encontrar
+          opciones que realmente tengan sentido según tus necesidades,
+          presupuesto y forma de uso.
         </p>
 
         <a
-          href="/categorias"
+          href="/compras-inteligentes"
           class="mt-7 inline-flex rounded-full bg-white px-6 py-3 font-semibold text-gray-950 transition hover:bg-blue-600 hover:text-white"
         >
-          Explorar categorías
+          Ver compras inteligentes
         </a>
 
       </div>
