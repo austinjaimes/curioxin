@@ -1,209 +1,141 @@
-<nav class="border-b border-gray-100 bg-white">
+---
 
+---
 
-<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+<nav class="sticky top-0 z-50 border-b border-gray-200/80 bg-white/90 backdrop-blur-md">
 
+  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 
 <!-- Logo -->
-
-<a 
-href="/"
-class="flex items-center gap-3"
+<a
+  href="/"
+  class="flex items-center transition-opacity duration-200 hover:opacity-80"
+  aria-label="Curioxin - Inicio"
 >
-
-<img
-src="/logo.png"
-alt="Curioxin"
-class="h-18 w-auto object-contain"
-/>
-
-
+  <img
+    src="/logo.png"
+    alt="Curioxin"
+    class="h-16 w-auto"
+  />
 </a>
 
 
+<!-- Desktop navigation -->
+<div class="hidden items-center gap-8 md:flex">
 
+  <a
+    href="/"
+    class="text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-blue-600"
+  >
+    Inicio
+  </a>
 
+  <a
+    href="/articulos"
+    class="text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-blue-600"
+  >
+    Artículos
+  </a>
 
-<!-- Desktop Menu -->
+  <a
+    href="/rankings"
+    class="text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-blue-600"
+  >
+    Rankings
+  </a>
 
-<div class="hidden items-center gap-10 md:flex">
+  <a
+    href="/categorias"
+    class="text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-blue-600"
+  >
+    Categorías
+  </a>
 
-
-<a 
-href="/"
-class="text-base font-medium text-gray-700 transition hover:text-blue-600"
->
-Inicio
-</a>
-
-
-
-<a 
-href="/rankings"
-class="text-base font-medium text-gray-700 transition hover:text-blue-600"
->
-Rankings
-</a>
-
-
-
-<a 
-href="/articulos"
-class="text-base font-medium text-gray-700 transition hover:text-blue-600"
->
-Artículos
-</a>
-
-
-
-<a 
-href="/categorias"
-class="text-base font-medium text-gray-700 transition hover:text-blue-600"
->
-Categorías
-</a>
-
-
+  <a
+    href="/explorar"
+    class="rounded-full bg-black px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-600/20"
+  >
+    Explorar
+  </a>
 
 </div>
 
 
-
-
-
-<!-- Desktop Button -->
-
-<a
-
-href="/explorar"
-
-class="hidden rounded-full bg-black px-7 py-3 text-base font-semibold text-white transition hover:bg-blue-600 md:block"
-
->
-Explorar
-</a>
-
-
-
-
-
-<!-- Mobile Button -->
-
+<!-- Mobile menu button -->
 <button
-
-id="menu-button"
-
-class="text-3xl md:hidden"
-
-aria-label="Abrir menú"
-
+  id="menu-button"
+  class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition hover:border-gray-300 hover:bg-gray-50 md:hidden"
+  aria-label="Abrir menú"
+  aria-expanded="false"
+  type="button"
 >
-
-☰
-
+  <span class="text-xl leading-none">☰</span>
 </button>
 
 
+  </div>
+
+  <!-- Mobile menu -->
+
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-gray-100 bg-white px-6 py-5 md:hidden"
+  >
+
+
+<div class="mx-auto flex max-w-7xl flex-col gap-1">
+
+  <a
+    href="/"
+    class="rounded-xl px-4 py-3 text-base font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-600"
+  >
+    Inicio
+  </a>
+
+  <a
+    href="/articulos"
+    class="rounded-xl px-4 py-3 text-base font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-600"
+  >
+    Artículos
+  </a>
+
+  <a
+    href="/rankings"
+    class="rounded-xl px-4 py-3 text-base font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-600"
+  >
+    Rankings
+  </a>
+
+  <a
+    href="/categorias"
+    class="rounded-xl px-4 py-3 text-base font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-600"
+  >
+    Categorías
+  </a>
+
+  <a
+    href="/explorar"
+    class="mt-2 rounded-full bg-black px-6 py-3 text-center text-base font-semibold text-white transition hover:bg-blue-600"
+  >
+    Explorar
+  </a>
 
 </div>
 
 
-
-
-
-
-
-<!-- Mobile Menu -->
-
-
-<div
-
-id="mobile-menu"
-
-class="hidden border-t border-gray-100 px-6 py-6 md:hidden"
-
->
-
-
-<div class="flex flex-col gap-6">
-
-
-
-<a 
-href="/"
-class="text-lg font-medium text-gray-700"
->
-Inicio
-</a>
-
-
-
-<a 
-href="/rankings"
-class="text-lg font-medium text-gray-700"
->
-Rankings
-</a>
-
-
-
-<a 
-href="/articulos"
-class="text-lg font-medium text-gray-700"
->
-Artículos
-</a>
-
-
-
-<a 
-href="/categorias"
-class="text-lg font-medium text-gray-700"
->
-Categorías
-</a>
-
-
-
-
-<a
-
-href="/explorar"
-
-class="mt-2 rounded-full bg-black px-6 py-3 text-center text-lg font-semibold text-white"
-
->
-Explorar
-</a>
-
-
-
-</div>
-
-
-</div>
-
-
+  </div>
 
 </nav>
 
-
-
-
-
-
 <script>
+  const button = document.getElementById("menu-button");
+  const menu = document.getElementById("mobile-menu");
 
-const button = document.getElementById("menu-button");
+  button?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
 
-const menu = document.getElementById("mobile-menu");
+    const expanded = button.getAttribute("aria-expanded") === "true";
 
-
-button?.addEventListener("click",()=>{
-
-menu?.classList.toggle("hidden");
-
-});
-
-
+    button.setAttribute("aria-expanded", String(!expanded));
+  });
 </script>
