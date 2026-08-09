@@ -4,167 +4,181 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 
-
 const articles = (await getCollection("articles"))
-.sort(
-(a,b)=>
-new Date(b.data.date).getTime() -
-new Date(a.data.date).getTime()
-);
+  .sort(
+    (a, b) =>
+      new Date(b.data.date).getTime() -
+      new Date(a.data.date).getTime()
+  );
 
+const categories = [
+  ...new Set(
+    articles.map(article => article.data.category)
+  )
+];
+
+const getCategorySlug = (category) =>
+  category
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replaceAll(" ", "-");
+
+const getCategoryCount = (category) =>
+  articles.filter(
+    article => article.data.category === category
+  ).length;
 ---
 
-
 <Layout
-
-title="Artículos | Curioxin"
-
-description="Análisis, comparativas y herramientas sobre tecnología, inteligencia artificial y productividad."
-
+  title="Artículos | Curioxin"
+  description="Análisis, comparativas y descubrimientos sobre tecnología, inteligencia artificial y productividad."
 >
 
+  <main class="mx-auto max-w-7xl px-6 py-20">
 
+    <header class="max-w-4xl">
 
-<main class="mx-auto max-w-7xl px-6 py-20">
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+        Curioxin
+      </p>
 
+      <h1 class="mt-5 text-5xl font-bold leading-tight tracking-tight text-gray-950 md:text-6xl">
+        Artículos sobre tecnología y mucho más
+      </h1>
 
+      <p class="mt-6 max-w-3xl text-xl leading-relaxed text-gray-600">
+        Explora análisis, comparativas, descubrimientos y recomendaciones
+        sobre tecnología, inteligencia artificial, productividad y herramientas digitales.
+      </p>
 
+      <div class="mt-8 flex flex-wrap gap-3">
 
+        <span class="rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-600">
+          {articles.length} {articles.length === 1 ? "artículo" : "artículos"}
+        </span>
 
-<section class="max-w-4xl">
+        {
+          categories.map(category => (
+            <a
+              href={`/categorias/${getCategorySlug(category)}`}
+              class="rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+            >
+              {category} · {getCategoryCount(category)}
+            </a>
+          ))
+        }
 
+      </div>
 
+    </header>
 
-<p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
 
-📄 Curioxin Artículos
+    <section class="mt-20">
 
-</p>
+      <div class="flex flex-col justify-between gap-4 border-b border-gray-200 pb-6 md:flex-row md:items-end">
 
+        <div>
 
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Biblioteca
+          </p>
 
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-gray-950">
+            Últimos artículos
+          </h2>
 
+        </div>
 
-<h1 class="mt-5 text-5xl font-bold leading-tight tracking-tight md:text-6xl">
+        <p class="text-sm text-gray-500">
+          Ordenados por fecha de publicación
+        </p>
 
-Análisis y descubrimientos sobre tecnología
+      </div>
 
-</h1>
 
+      {
+        articles.length > 0 ? (
 
+          <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
+            {
+              articles.map(article => (
 
+                <ArticleCard
+                  slug={article.id}
+                  image={article.data.image}
+                  category={article.data.category}
+                  title={article.data.title}
+                  description={article.data.description}
+                  date={article.data.date}
+                  type="article"
+                />
 
-<p class="mt-6 max-w-3xl text-xl leading-relaxed text-gray-600">
+              ))
+            }
 
-Explora análisis, comparativas y recomendaciones sobre
-inteligencia artificial, aplicaciones, gadgets y herramientas
-digitales que pueden mejorar tu día a día.
+          </div>
 
-</p>
+        ) : (
 
+          <section class="mt-10 rounded-3xl border border-gray-200 p-10 text-center">
 
+            <h2 class="text-2xl font-bold text-gray-950">
+              Aún no hay artículos publicados
+            </h2>
 
+            <p class="mt-4 text-gray-600">
+              Pronto encontrarás nuevos análisis y descubrimientos sobre tecnología.
+            </p>
 
+          </section>
 
-<div class="mt-8 inline-flex rounded-full bg-gray-100 px-5 py-3 text-sm font-medium text-gray-600">
+        )
+      }
 
-{articles.length} artículos publicados
+    </section>
 
-</div>
 
+    <section class="mt-20 rounded-3xl bg-gray-950 px-8 py-10 text-white md:px-12">
 
+      <div class="max-w-2xl">
 
-</section>
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
+          Sigue explorando
+        </p>
 
+        <h2 class="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+          Encuentra más formas de descubrir tecnología
+        </h2>
 
+        <p class="mt-4 leading-relaxed text-gray-400">
+          Además de nuestros artículos, puedes explorar rankings y comparativas
+          para encontrar productos y herramientas que realmente valen la pena.
+        </p>
 
+        <div class="mt-7 flex flex-wrap gap-3">
 
+          <a
+            href="/rankings"
+            class="rounded-full bg-white px-6 py-3 font-semibold text-gray-950 transition hover:bg-blue-600 hover:text-white"
+          >
+            Ver rankings
+          </a>
 
+          <a
+            href="/categorias"
+            class="rounded-full border border-gray-700 px-6 py-3 font-semibold text-white transition hover:border-white"
+          >
+            Explorar categorías
+          </a>
 
+        </div>
 
+      </div>
 
+    </section>
 
-{
-articles.length > 0 ? (
-
-
-<section class="mt-16 grid gap-8 md:grid-cols-3">
-
-
-
-{
-articles.map((article)=>(
-
-
-
-<ArticleCard
-
-
-slug={article.id}
-
-image={article.data.image}
-
-category={article.data.category}
-
-title={article.data.title}
-
-description={article.data.description}
-
-date={article.data.date}
-
-type="article"
-
-
-
-/>
-
-
-
-))
-}
-
-
-
-</section>
-
-
-
-) : (
-
-
-
-<section class="mt-16 rounded-3xl border border-gray-200 p-10 text-center">
-
-
-<h2 class="text-2xl font-bold">
-
-Aún no hay artículos publicados
-
-</h2>
-
-
-
-<p class="mt-4 text-gray-600">
-
-Pronto encontrarás análisis y contenido sobre tecnología.
-
-</p>
-
-
-
-</section>
-
-
-
-)
-
-}
-
-
-
-</main>
-
-
+  </main>
 
 </Layout>
