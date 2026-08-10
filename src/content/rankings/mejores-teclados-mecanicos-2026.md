@@ -198,6 +198,16 @@ Si nunca has utilizado un teclado mecánico, no es necesario empezar directament
 
 El Redragon K617 permite acceder a este tipo de teclado con una inversión menor y puede ser una buena forma de comprobar si realmente te gusta la experiencia mecánica.
 
+## ¿No sabes qué equipo gaming elegir?
+
+Elegir un equipo gaming no depende únicamente de tener el procesador más potente o la tarjeta gráfica más avanzada.
+
+Dependiendo de tu presupuesto y del tipo de juegos que quieras disfrutar, algunas características pueden ser mucho más importantes que otras.
+
+Si quieres saber qué debes revisar antes de comprar, qué especificaciones realmente importan y cómo elegir el equipo adecuado según tus necesidades,
+
+[**Consulta nuestra guía para comprar equipo gaming →**](/compras-inteligentes/gaming)
+
 ## ¿Qué son los switches de un teclado mecánico?
 
 Los switches son los mecanismos situados debajo de las teclas y determinan gran parte de la sensación al escribir.

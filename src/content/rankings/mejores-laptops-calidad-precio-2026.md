@@ -256,6 +256,16 @@ La HP Pavilion Plus busca situarse entre las laptops económicas y los equipos p
 
 Su combinación de pantalla, diseño y rendimiento la convierte en una alternativa interesante para usuarios que quieren algo más completo que una laptop básica, pero no necesariamente necesitan un equipo profesional.
 
+## ¿No sabes qué laptop elegir?
+
+Elegir una laptop no depende únicamente de tener el procesador más potente o la mayor cantidad de memoria RAM.
+
+Dependiendo de tu presupuesto y de cómo piensas utilizarla, algunas características pueden ser mucho más importantes que otras.
+
+Si quieres saber qué debes revisar antes de comprar, qué especificaciones realmente importan y cómo elegir una laptop según tus necesidades,
+
+[**Consulta nuestra guía para comprar una Laptop →**](/compras-inteligentes/laptops)
+
 ### ¿Para quién vale la pena?
 
 Es una opción interesante para:

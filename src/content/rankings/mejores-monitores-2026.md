@@ -200,6 +200,16 @@ Para estudiar o trabajar, no es necesario pagar mucho dinero únicamente por ten
 
 Para gaming, en cambio, una frecuencia elevada puede mejorar considerablemente la sensación de fluidez.
 
+## ¿No sabes qué monitor elegir?
+
+Elegir un monitor no depende únicamente de tener la mayor resolución o la frecuencia de actualización más alta.
+
+Dependiendo de tu presupuesto y de cómo piensas utilizarlo, algunas características pueden ser mucho más importantes que otras.
+
+Si quieres saber qué debes revisar antes de comprar, qué especificaciones realmente importan y cómo elegir un monitor según tus necesidades,
+
+[**Consulta nuestra guía para comprar un Monitor →**](/compras-inteligentes/monitores)
+
 ## ¿OLED, IPS o VA: qué tipo de panel conviene?
 
 El tipo de panel también influye en la experiencia.

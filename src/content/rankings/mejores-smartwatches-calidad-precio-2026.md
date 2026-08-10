@@ -216,6 +216,16 @@ También puede ser importante contar con GPS integrado si quieres registrar reco
 
 Huawei Watch GT 5 Pro y Amazfit Balance 2 son especialmente interesantes para usuarios que buscan una mayor orientación deportiva sin entrar necesariamente en el precio de algunos relojes especializados.
 
+## ¿No sabes qué smartwatch elegir?
+
+Elegir un smartwatch no depende únicamente de tener más funciones o una pantalla más avanzada.
+
+Dependiendo de tu presupuesto y de cómo piensas utilizarlo, algunas características pueden ser mucho más importantes que otras.
+
+Si quieres saber qué debes revisar antes de comprar, qué especificaciones realmente importan y cómo elegir un smartwatch según tus necesidades,
+
+[**Consulta nuestra guía para comprar un Smartwatch →**](/compras-inteligentes/smartwatches)
+
 ## ¿Un smartwatch sirve para monitorear la salud?
 
 Los smartwatches actuales incorporan diferentes sensores y funciones relacionadas con el seguimiento del bienestar.

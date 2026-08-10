@@ -542,7 +542,7 @@ Dependiendo de tu presupuesto y de cómo piensas utilizarlo, algunas caracterís
 
 Si quieres saber qué debes revisar antes de comprar, qué especificaciones realmente importan y cómo elegir un celular según tus necesidades, 
 
-[**Consulta nuestra guía para comprar un Celular →**](/compras-inteligentes/como-elegir-un-celular)
+[**Consulta nuestra guía para comprar un Celular →**](/compras-inteligentes/celulares)
 
 
 # ¿Cuál tiene la mejor cámara?
