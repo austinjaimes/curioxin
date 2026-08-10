@@ -9,474 +9,604 @@ import ArticleCard from "../components/ArticleCard.astro";
 const articles = await getCollection("articles");
 const rankings = await getCollection("rankings");
 
-const query = Astro.url.searchParams.get("q") ?? "";
-const search = query.toLowerCase().trim();
+/*
+ * Los datos se generan durante el build.
+ * La búsqueda se ejecuta después en el navegador,
+ * por lo que podemos mantener prerender=true.
+ */
 
+const searchData = [
+  ...articles.map((article) => ({
+    id: article.id,
+    type: "article",
+    title: article.data.title,
+    description: article.data.description,
+    category: article.data.category,
+    image: article.data.image,
+    date: article.data.date,
+  })),
 
+  ...rankings.map((ranking) => ({
+    id: ranking.id,
+    type: "ranking",
+    title: ranking.data.title,
+    description: ranking.data.description,
+    category: ranking.data.category,
+    image: ranking.data.image,
+    date: ranking.data.date,
+  })),
+];
 
-const articleResults = search
+const articlesData = articles.map((article) => ({
+  id: article.id,
+  image: article.data.image,
+  category: article.data.category,
+  title: article.data.title,
+  description: article.data.description,
+  date: article.data.date,
+}));
 
-? articles
-.filter(article => {
-
-const text = `
-${article.data.title}
-${article.data.description}
-${article.data.category}
-`.toLowerCase();
-
-
-return text.includes(search);
-
-})
-.sort(
-(a,b)=>
-new Date(b.data.date).getTime() -
-new Date(a.data.date).getTime()
-)
-
-: [];
-
-
-
-
-
-
-
-const rankingResults = search
-
-? rankings
-.filter(ranking => {
-
-const text = `
-${ranking.data.title}
-${ranking.data.description}
-${ranking.data.category}
-`.toLowerCase();
-
-
-return text.includes(search);
-
-})
-.sort(
-(a,b)=>
-new Date(b.data.date).getTime() -
-new Date(a.data.date).getTime()
-)
-
-: [];
-
-
-
-
-const totalResults =
-articleResults.length + rankingResults.length;
-
+const rankingsData = rankings.map((ranking) => ({
+  id: ranking.id,
+  image: ranking.data.image,
+  category: ranking.data.category,
+  title: ranking.data.title,
+  description: ranking.data.description,
+  date: ranking.data.date,
+}));
 ---
 
-
-
 <Layout
-
-title="Buscar | Curioxin"
-
-description="Busca artículos y rankings sobre tecnología en Curioxin."
-
+  title="Buscar | Curioxin"
+  description="Busca artículos y rankings sobre tecnología en Curioxin."
 >
 
+  <main class="mx-auto max-w-7xl px-6 py-20">
 
+    <section class="max-w-3xl">
 
-<main class="mx-auto max-w-7xl px-6 py-20">
+      <p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+        🔎 Buscar en Curioxin
+      </p>
 
+      <h1 class="mt-5 text-5xl font-bold tracking-tight">
+        Encuentra contenido
+      </h1>
 
+      <p class="mt-5 text-lg text-gray-600">
+        Busca artículos, rankings y análisis sobre tecnología,
+        inteligencia artificial y productividad.
+      </p>
 
+    </section>
 
 
-<section class="max-w-3xl">
+    <form
+      id="search-form"
+      action="/buscar"
+      method="GET"
+      class="mt-10 flex flex-col gap-4 sm:flex-row"
+    >
 
+      <input
+        id="search-input"
+        type="search"
+        name="q"
+        placeholder="Buscar tecnología, IA, aplicaciones..."
+        class="flex-1 rounded-2xl border border-gray-200 px-6 py-4 text-lg outline-none transition focus:border-blue-600"
+      />
 
-<p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+      <button
+        type="submit"
+        class="rounded-2xl bg-black px-8 py-4 font-semibold text-white transition hover:bg-blue-600"
+      >
+        Buscar
+      </button>
 
-🔎 Buscar en Curioxin
+    </form>
 
-</p>
 
+    <!-- Resultados de búsqueda -->
 
+    <div id="search-results" class="hidden">
 
-<h1 class="mt-5 text-5xl font-bold tracking-tight">
+      <section class="mt-14">
 
-Encuentra contenido
+        <h2 class="text-3xl font-bold">
+          Resultados para:
 
-</h1>
+          <span
+            id="search-query"
+            class="text-blue-600"
+          ></span>
+        </h2>
 
+        <p
+          id="results-count"
+          class="mt-3 text-gray-500"
+        ></p>
 
+      </section>
 
 
-<p class="mt-5 text-lg text-gray-600">
+      <!-- Artículos -->
 
-Busca artículos, rankings y análisis sobre tecnología,
-inteligencia artificial y productividad.
+      <section
+        id="articles-section"
+        class="mt-14 hidden"
+      >
 
-</p>
+        <div class="mb-8">
 
+          <h2 class="text-3xl font-bold">
+            📄 Artículos
+          </h2>
 
+          <p class="mt-2 text-gray-600">
+            Análisis y contenido editorial.
+          </p>
 
-</section>
+        </div>
 
 
+        <div
+          id="articles-grid"
+          class="grid gap-8 md:grid-cols-3"
+        ></div>
 
+      </section>
 
 
+      <!-- Rankings -->
 
+      <section
+        id="rankings-section"
+        class="mt-20 hidden"
+      >
 
-<form
+        <div class="mb-8">
 
-action="/buscar"
+          <h2 class="text-3xl font-bold">
+            🏆 Rankings
+          </h2>
 
-method="GET"
+          <p class="mt-2 text-gray-600">
+            Comparativas y selecciones de tecnología.
+          </p>
 
-class="mt-10 flex flex-col gap-4 sm:flex-row"
+        </div>
 
 
->
+        <div
+          id="rankings-grid"
+          class="grid gap-8 md:grid-cols-3"
+        ></div>
 
+      </section>
 
-<input
 
+      <!-- Sin resultados -->
 
-type="search"
+      <section
+        id="no-results"
+        class="mt-16 hidden rounded-3xl border border-gray-200 p-10 text-center"
+      >
 
-name="q"
+        <h2 class="text-2xl font-bold">
+          No encontramos resultados
+        </h2>
 
-value={query}
+        <p class="mt-4 text-gray-600">
+          Intenta buscar otro término como "IA",
+          "Samsung", "productividad" o "apps".
+        </p>
 
-placeholder="Buscar tecnología, IA, aplicaciones..."
+      </section>
 
-class="flex-1 rounded-2xl border border-gray-200 px-6 py-4 text-lg outline-none transition focus:border-blue-600"
+    </div>
 
 
+    <!-- Estado inicial -->
 
-/>
+    <section
+      id="empty-search"
+      class="mt-16 rounded-3xl bg-gray-50 p-10"
+    >
 
+      <h2 class="text-2xl font-bold">
+        ¿Qué puedes buscar?
+      </h2>
 
+      <div class="mt-6 flex flex-wrap gap-3">
 
+        <button
+          type="button"
+          data-search="Inteligencia Artificial"
+          class="search-suggestion rounded-full bg-white px-5 py-2 text-sm shadow transition hover:bg-blue-600 hover:text-white"
+        >
+          Inteligencia Artificial
+        </button>
 
-<button
+        <button
+          type="button"
+          data-search="Gadgets"
+          class="search-suggestion rounded-full bg-white px-5 py-2 text-sm shadow transition hover:bg-blue-600 hover:text-white"
+        >
+          Gadgets
+        </button>
 
-type="submit"
+        <button
+          type="button"
+          data-search="Productividad"
+          class="search-suggestion rounded-full bg-white px-5 py-2 text-sm shadow transition hover:bg-blue-600 hover:text-white"
+        >
+          Productividad
+        </button>
 
-class="rounded-2xl bg-black px-8 py-4 font-semibold text-white transition hover:bg-blue-600"
+        <button
+          type="button"
+          data-search="Gaming"
+          class="search-suggestion rounded-full bg-white px-5 py-2 text-sm shadow transition hover:bg-blue-600 hover:text-white"
+        >
+          Gaming
+        </button>
 
->
+      </div>
 
-Buscar
+    </section>
 
-</button>
+  </main>
 
 
+  <script define:vars={{ articlesData, rankingsData }}>
 
-</form>
+    /*
+     * Convertimos los datos generados por Astro
+     * en datos disponibles para JavaScript.
+     */
 
+    const articles = articlesData;
+    const rankings = rankingsData;
 
 
+    const form = document.querySelector("#search-form");
+    const input = document.querySelector("#search-input");
 
+    const searchResults = document.querySelector("#search-results");
+    const emptySearch = document.querySelector("#empty-search");
 
+    const searchQuery = document.querySelector("#search-query");
+    const resultsCount = document.querySelector("#results-count");
 
+    const articlesSection = document.querySelector("#articles-section");
+    const rankingsSection = document.querySelector("#rankings-section");
 
+    const articlesGrid = document.querySelector("#articles-grid");
+    const rankingsGrid = document.querySelector("#rankings-grid");
 
+    const noResults = document.querySelector("#no-results");
 
-{
-query && (
 
-<section class="mt-14">
+    /*
+     * Escapa HTML para evitar insertar directamente
+     * contenido introducido por el usuario.
+     */
 
+    function escapeHTML(value) {
 
-<h2 class="text-3xl font-bold">
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-Resultados para:
+    }
 
-<span class="text-blue-600">
 
-"{query}"
+    /*
+     * Normaliza texto para que la búsqueda sea
+     * más tolerante con mayúsculas y acentos.
+     *
+     * Ejemplo:
+     *
+     * "Samsung Galaxy"
+     *
+     * puede encontrarse aunque escribas:
+     *
+     * "samsung"
+     */
 
-</span>
+    function normalize(text) {
 
-</h2>
+      return String(text ?? "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
 
+    }
 
 
-<p class="mt-3 text-gray-500">
+    /*
+     * Genera la tarjeta de cada resultado.
+     */
 
-{
-totalResults > 0
-? `${totalResults} resultados encontrados`
-: "No encontramos coincidencias"
-}
+    function createCard(item) {
 
-</p>
+      const href =
+        item.type === "ranking"
+          ? `/rankings/${item.id}`
+          : `/articulos/${item.id}`;
 
 
-</section>
+      return `
+        <article class="overflow-hidden rounded-3xl border border-gray-200 bg-white transition hover:-translate-y-1 hover:shadow-xl">
 
-)
+          <a href="${href}" class="block">
 
-}
+            ${
+              item.image
+                ? `
+                  <img
+                    src="${escapeHTML(item.image)}"
+                    alt="${escapeHTML(item.title)}"
+                    class="h-56 w-full object-cover"
+                    loading="lazy"
+                  />
+                `
+                : ""
+            }
 
+            <div class="p-6">
 
+              <p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+                ${escapeHTML(item.category)}
+              </p>
 
+              <h3 class="mt-3 text-xl font-bold">
+                ${escapeHTML(item.title)}
+              </h3>
 
+              <p class="mt-3 line-clamp-3 text-gray-600">
+                ${escapeHTML(item.description)}
+              </p>
 
+              ${
+                item.date
+                  ? `
+                    <p class="mt-5 text-sm text-gray-400">
+                      ${escapeHTML(item.date)}
+                    </p>
+                  `
+                  : ""
+              }
 
+            </div>
 
+          </a>
 
+        </article>
+      `;
+    }
 
-{
-articleResults.length > 0 && (
 
+    /*
+     * Ejecuta la búsqueda.
+     */
 
-<section class="mt-14">
+    function performSearch(query) {
 
+      const search = normalize(query);
 
-<div class="mb-8">
 
-<h2 class="text-3xl font-bold">
+      if (!search) {
 
-📄 Artículos
+        searchResults.classList.add("hidden");
+        emptySearch.classList.remove("hidden");
 
-</h2>
+        return;
 
+      }
 
-<p class="mt-2 text-gray-600">
 
-Análisis y contenido editorial.
+      emptySearch.classList.add("hidden");
+      searchResults.classList.remove("hidden");
 
-</p>
 
+      input.value = query;
 
-</div>
+      searchQuery.textContent = `"${query}"`;
 
 
+      /*
+       * Buscamos en:
+       *
+       * - título
+       * - descripción
+       * - categoría
+       */
 
+      const articleResults = articles
+        .filter(article => {
 
+          const text = normalize(`
+            ${article.title}
+            ${article.description}
+            ${article.category}
+          `);
 
-<div class="grid gap-8 md:grid-cols-3">
+          return text.includes(search);
 
+        })
+        .sort(
+          (a, b) =>
+            new Date(b.date).getTime() -
+            new Date(a.date).getTime()
+        );
 
-{
-articleResults.map(article => (
 
+      const rankingResults = rankings
+        .filter(ranking => {
 
-<ArticleCard
+          const text = normalize(`
+            ${ranking.title}
+            ${ranking.description}
+            ${ranking.category}
+          `);
 
-slug={article.id}
+          return text.includes(search);
 
-image={article.data.image}
+        })
+        .sort(
+          (a, b) =>
+            new Date(b.date).getTime() -
+            new Date(a.date).getTime()
+        );
 
-category={article.data.category}
 
-title={article.data.title}
+      const totalResults =
+        articleResults.length +
+        rankingResults.length;
 
-description={article.data.description}
 
-date={article.data.date}
+      resultsCount.textContent =
+        totalResults > 0
+          ? `${totalResults} resultados encontrados`
+          : "No encontramos coincidencias";
 
-type="article"
 
-/>
+      /*
+       * Artículos
+       */
 
+      if (articleResults.length > 0) {
 
-))
+        articlesSection.classList.remove("hidden");
 
-}
+        articlesGrid.innerHTML =
+          articleResults
+            .map(createCard)
+            .join("");
 
+      } else {
 
+        articlesSection.classList.add("hidden");
 
-</div>
+        articlesGrid.innerHTML = "";
 
+      }
 
-</section>
 
+      /*
+       * Rankings
+       */
 
-)
+      if (rankingResults.length > 0) {
 
-}
+        rankingsSection.classList.remove("hidden");
 
+        rankingsGrid.innerHTML =
+          rankingResults
+            .map(createCard)
+            .join("");
 
+      } else {
 
+        rankingsSection.classList.add("hidden");
 
+        rankingsGrid.innerHTML = "";
 
+      }
 
 
+      /*
+       * Sin resultados
+       */
 
+      if (totalResults === 0) {
 
-{
-rankingResults.length > 0 && (
+        noResults.classList.remove("hidden");
 
+      } else {
 
-<section class="mt-20">
+        noResults.classList.add("hidden");
 
+      }
 
-<div class="mb-8">
+    }
 
-<h2 class="text-3xl font-bold">
 
-🏆 Rankings
+    /*
+     * Cuando se envía el formulario,
+     * dejamos que el navegador vaya a:
+     *
+     * /buscar?q=termino
+     *
+     * Esto mantiene las búsquedas compartibles
+     * y permite usar el botón Atrás del navegador.
+     */
 
-</h2>
+    form.addEventListener("submit", () => {
 
+      const query = input.value.trim();
 
-<p class="mt-2 text-gray-600">
+      if (!query) {
 
-Comparativas y selecciones de herramientas.
+        return;
 
-</p>
+      }
 
+    });
 
-</div>
 
+    /*
+     * Botones de sugerencias.
+     */
 
+    document
+      .querySelectorAll(".search-suggestion")
+      .forEach(button => {
 
+        button.addEventListener("click", () => {
 
+          const query =
+            button.dataset.search ?? "";
 
-<div class="grid gap-8 md:grid-cols-3">
+          input.value = query;
 
+          form.requestSubmit();
 
-{
-rankingResults.map(ranking => (
+        });
 
+      });
 
-<ArticleCard
 
-slug={ranking.id}
+    /*
+     * Leemos ?q= directamente desde la URL.
+     *
+     * No usamos Astro.url.searchParams aquí,
+     * porque la página está prerenderizada.
+     */
 
-image={ranking.data.image}
+    const params =
+      new URLSearchParams(window.location.search);
 
-category={ranking.data.category}
+    const initialQuery =
+      params.get("q") ?? "";
 
-title={ranking.data.title}
 
-description={ranking.data.description}
+    /*
+     * Ejecutamos la búsqueda automáticamente
+     * si existe ?q= en la URL.
+     */
 
-type="ranking"
+    if (initialQuery.trim()) {
 
-/>
+      performSearch(initialQuery);
 
+    }
 
-))
-
-}
-
-
-</div>
-
-
-</section>
-
-
-)
-
-}
-
-
-
-
-
-
-
-
-
-{
-query && totalResults === 0 && (
-
-
-<section class="mt-16 rounded-3xl border border-gray-200 p-10 text-center">
-
-
-<h2 class="text-2xl font-bold">
-
-No encontramos resultados
-
-</h2>
-
-
-<p class="mt-4 text-gray-600">
-
-Intenta buscar otro término como "IA",
-"Samsung", "productividad" o "apps".
-
-</p>
-
-
-</section>
-
-
-)
-
-}
-
-
-
-
-
-
-{
-!query && (
-
-<section class="mt-16 rounded-3xl bg-gray-50 p-10">
-
-
-<h2 class="text-2xl font-bold">
-
-¿Qué puedes buscar?
-
-</h2>
-
-
-<div class="mt-6 flex flex-wrap gap-3">
-
-
-<span class="rounded-full bg-white px-5 py-2 text-sm shadow">
-
-Inteligencia Artificial
-
-</span>
-
-
-<span class="rounded-full bg-white px-5 py-2 text-sm shadow">
-
-Gadgets
-
-</span>
-
-
-<span class="rounded-full bg-white px-5 py-2 text-sm shadow">
-
-Productividad
-
-</span>
-
-
-<span class="rounded-full bg-white px-5 py-2 text-sm shadow">
-
-Gaming
-
-</span>
-
-
-</div>
-
-
-</section>
-
-
-)
-
-}
-
-
-
-</main>
-
-
+  </script>
 
 </Layout>
