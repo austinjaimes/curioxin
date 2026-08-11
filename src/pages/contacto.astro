@@ -2,165 +2,241 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-
 <Layout
-
-title="Contacto | Curioxin"
-
-description="Contacta al equipo de Curioxin para dudas, sugerencias, colaboraciones o comentarios."
-
+  title="Contacto | Curioxin"
+  description="Contacta al equipo de Curioxin para preguntas, sugerencias, colaboraciones, correcciones o comentarios sobre nuestro contenido."
 >
 
+  <main class="mx-auto max-w-5xl px-6 py-20">
 
-<main class="mx-auto max-w-4xl px-6 py-20">
+    <!-- Hero -->
 
+    <header class="max-w-3xl">
 
+      <p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+        Contacto
+      </p>
 
-<header>
+      <h1 class="mt-5 text-5xl font-bold tracking-tight sm:text-6xl">
+        Hablemos
+      </h1>
 
+      <p class="mt-6 text-xl leading-relaxed text-gray-600">
+        ¿Tienes una pregunta, una sugerencia o una propuesta?
+        Puedes ponerte en contacto con el equipo de Curioxin.
+      </p>
 
-<p class="text-sm font-semibold text-blue-600">
-Contacto
-</p>
+    </header>
 
 
-<h1 class="mt-4 text-5xl font-bold tracking-tight">
-Hablemos con nosotros
-</h1>
+    <!-- Contact options -->
 
+    <section class="mt-14 grid gap-6 md:grid-cols-2">
 
-<p class="mt-6 text-xl leading-relaxed text-gray-600">
+      <!-- Email -->
 
-Si tienes dudas, sugerencias, comentarios o propuestas de colaboración,
-puedes contactar al equipo de Curioxin.
+      <div
+        class="rounded-3xl border border-gray-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-lg"
+      >
 
-</p>
+        <div
+          class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl"
+        >
+          ✉️
+        </div>
 
+        <h2 class="mt-6 text-2xl font-bold">
+          Correo electrónico
+        </h2>
 
-</header>
+        <p class="mt-3 leading-relaxed text-gray-600">
+          Para preguntas generales, sugerencias, comentarios,
+          correcciones o cualquier asunto relacionado con Curioxin.
+        </p>
 
+        <a
+          href="mailto:curioxof@gmail.com"
+          class="mt-5 inline-flex items-center font-semibold text-blue-600 transition hover:text-blue-700"
+        >
+          curioxof@gmail.com
+          <span class="ml-2">→</span>
+        </a>
 
+      </div>
 
 
+      <!-- Collaborations -->
 
+      <div
+        class="rounded-3xl border border-gray-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-lg"
+      >
 
+        <div
+          class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl"
+        >
+          🤝
+        </div>
 
-<section class="mt-12 grid gap-6 md:grid-cols-2">
+        <h2 class="mt-6 text-2xl font-bold">
+          Colaboraciones
+        </h2>
 
+        <p class="mt-3 leading-relaxed text-gray-600">
+          Si tienes una propuesta relacionada con tecnología,
+          inteligencia artificial, aplicaciones, herramientas digitales
+          o creación de contenido, puedes enviarnos los detalles por correo.
+        </p>
 
+        <a
+          href="mailto:curioxof@gmail.com?subject=Propuesta%20de%20colaboración%20para%20Curioxin"
+          class="mt-5 inline-flex items-center font-semibold text-blue-600 transition hover:text-blue-700"
+        >
+          Enviar propuesta
+          <span class="ml-2">→</span>
+        </a>
 
-<div class="rounded-3xl border border-gray-200 p-8">
+      </div>
 
+    </section>
 
-<div class="text-4xl">
-✉️
-</div>
 
+    <!-- What can you contact us about -->
 
-<h2 class="mt-5 text-2xl font-bold">
-Correo electrónico
-</h2>
+    <section class="mt-14 rounded-3xl border border-gray-200 p-8 sm:p-10">
 
+      <p class="text-sm font-semibold uppercase tracking-widest text-blue-600">
+        ¿En qué podemos ayudarte?
+      </p>
 
-<p class="mt-3 text-gray-600">
+      <h2 class="mt-3 text-3xl font-bold">
+        Puedes escribirnos sobre
+      </h2>
 
-Para preguntas generales, sugerencias o comentarios:
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
 
-</p>
+        <div class="rounded-2xl bg-gray-50 p-5">
+          <h3 class="font-semibold">
+            💡 Sugerencias
+          </h3>
 
+          <p class="mt-2 text-sm leading-relaxed text-gray-600">
+            Ideas para nuevos temas, rankings, comparativas o contenido.
+          </p>
+        </div>
 
-<a
 
-href="mailto:contacto@curioxin.com"
+        <div class="rounded-2xl bg-gray-50 p-5">
+          <h3 class="font-semibold">
+            ✏️ Correcciones
+          </h3>
 
-class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-700"
+          <p class="mt-2 text-sm leading-relaxed text-gray-600">
+            Si encuentras un error o información que debería actualizarse,
+            puedes informarnos.
+          </p>
+        </div>
 
->
-curioxof@gmail.com
-</a>
 
+        <div class="rounded-2xl bg-gray-50 p-5">
+          <h3 class="font-semibold">
+            🤝 Colaboraciones
+          </h3>
 
-</div>
+          <p class="mt-2 text-sm leading-relaxed text-gray-600">
+            Propuestas relacionadas con tecnología, IA y herramientas digitales.
+          </p>
+        </div>
 
 
+        <div class="rounded-2xl bg-gray-50 p-5">
+          <h3 class="font-semibold">
+            💬 Comentarios
+          </h3>
 
+          <p class="mt-2 text-sm leading-relaxed text-gray-600">
+            También puedes escribirnos simplemente para compartir tu opinión.
+          </p>
+        </div>
 
+      </div>
 
+    </section>
 
 
-<div class="rounded-3xl border border-gray-200 p-8">
+    <!-- Before contacting -->
 
+    <section class="mt-14 rounded-3xl bg-gray-50 p-8 sm:p-10">
 
-<div class="text-4xl">
-💬
-</div>
+      <h2 class="text-3xl font-bold">
+        Antes de escribirnos
+      </h2>
 
+      <p class="mt-4 max-w-2xl leading-relaxed text-gray-600">
+        Para poder atender mejor tu mensaje, intenta incluir toda la
+        información relevante sobre tu pregunta, propuesta o comentario.
+      </p>
 
-<h2 class="mt-5 text-2xl font-bold">
-Colaboraciones
-</h2>
+      <ul class="mt-6 space-y-4 text-gray-600">
 
+        <li class="flex gap-3">
+          <span class="font-semibold text-blue-600">✓</span>
+          <span>
+            Revisamos las solicitudes y mensajes que recibimos.
+          </span>
+        </li>
 
-<p class="mt-3 text-gray-600">
+        <li class="flex gap-3">
+          <span class="font-semibold text-blue-600">✓</span>
+          <span>
+            Las sugerencias para mejorar nuestro contenido son bienvenidas.
+          </span>
+        </li>
 
-Si estás interesado en colaborar con Curioxin,
-puedes escribirnos y revisar tu propuesta.
+        <li class="flex gap-3">
+          <span class="font-semibold text-blue-600">✓</span>
+          <span>
+            Las propuestas relacionadas con tecnología e innovación digital
+            pueden enviarse por correo.
+          </span>
+        </li>
 
-</p>
+      </ul>
 
+    </section>
 
-</div>
 
+    <!-- Final CTA -->
 
+    <section class="mt-14 rounded-3xl bg-black p-8 text-white sm:p-10">
 
+      <div class="max-w-2xl">
 
-</section>
+        <p class="text-sm font-semibold uppercase tracking-widest text-blue-400">
+          Estamos aquí
+        </p>
 
+        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">
+          ¿Tienes algo que contarnos?
+        </h2>
 
+        <p class="mt-4 leading-relaxed text-gray-300">
+          Escríbenos y cuéntanos qué necesitas. Ya sea una pregunta,
+          una sugerencia, una corrección o una propuesta de colaboración,
+          estaremos encantados de conocerla.
+        </p>
 
+        <a
+          href="mailto:curioxof@gmail.com"
+          class="mt-7 inline-flex items-center rounded-2xl bg-white px-6 py-3 font-semibold text-black transition hover:bg-blue-600 hover:text-white"
+        >
+          Contactar a Curioxin
+          <span class="ml-2">→</span>
+        </a>
 
+      </div>
 
+    </section>
 
-
-
-<section class="mt-12 rounded-3xl bg-gray-50 p-8">
-
-
-<h2 class="text-3xl font-bold">
-Antes de escribirnos
-</h2>
-
-
-<ul class="mt-5 space-y-3 text-gray-600">
-
-
-<li>
-✓ Revisamos todas las solicitudes recibidas.
-</li>
-
-
-<li>
-✓ Agradecemos sugerencias para mejorar nuestro contenido.
-</li>
-
-
-<li>
-✓ Las propuestas relacionadas con tecnología y herramientas digitales son bienvenidas.
-</li>
-
-
-</ul>
-
-
-</section>
-
-
-
-
-
-
-
-</main>
-
+  </main>
 
 </Layout>
